@@ -11,8 +11,14 @@ interface Book {
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  template: `
+    <h1>Books</h1>
+
+    <ng-container *ngFor="let book of books$ | async">
+      <h2>{{ book.title }}</h2>
+      <p>{{ book.body }}</p>
+    </ng-container>
+  `,
 })
 export class AppComponent {
   books$ = this.http.get<Book[]>(
